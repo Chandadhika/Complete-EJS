@@ -1,0 +1,35 @@
+<section>
+    <h1>Welcome to <%= title %>!</h1>
+    <form action="/add" method="POST">
+      <input type="text" name="item" placeholder="Add new item" required />
+      <button type="submit">Add</button>
+    </form><br>
+  
+    <form action="/find" method="POST">
+      <input type="text" name="query" placeholder="Search items" required />
+      <button type="submit">Find</button>
+    </form><br>
+  
+    <form action="/sort" method="POST" style="display: inline;">
+      <button id="sort" type="submit">Sort Items</button>
+    </form>
+  
+    <ul id="items-list">
+      <% items.forEach((item, index) => { %>
+        <li class="item" data-index="<%= index %>">
+          <span class="item-name"><%= item.name %></span>
+          <div class="item-actions" style="display: none;">
+            <form action="/update" method="POST" style="display: inline;">
+              <textarea name="updatedItem" placeholder="Edit item" required><%= item.name %></textarea>
+              <input type="hidden" name="index" value="<%= index %>" />
+              <button type="submit">Update</button>
+            </form>
+            <form action="/delete" method="POST" style="display: inline;">
+              <input type="hidden" name="index" value="<%= index %>" />
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  </section>
